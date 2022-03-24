@@ -1,4 +1,4 @@
-#include "rlgl.h"
+#include "rlgl_pure.h"
 
 #if defined(GRAPHICS_API_OPENGL_11)
     #if defined(__APPLE__)
