@@ -1,6 +1,6 @@
 OUTD=build
 NAME=rlgl
-SRC=src/rlgl.c src/raymath.c
+SRC=src/rlgl.c
 OBJ=$(patsubst %.c, %.o, $(SRC))
 ifeq ($(OS), Windows_NT)
 	CC=cl
@@ -17,16 +17,13 @@ else
 		FLAGS=-lgl
 	endif
 endif
-OPTS=
+OPTS=-Wno-everything -Wno-deprecated-declarations -DGL_SILENCE_DEPRECATION
 LIB=$(OUTD)/lib$(NAME).$(LIBEXT)
 
 default: $(OUTD) $(LIB)
 
 $(OUTD):
 	mkdir $(OUTD)
-
-$(SRC):
-	ruby fetch.rb
 
 $(LIB): $(OBJ)
 	$(CC) -Isrc/ $(FLAGS) $(OPTS) -o $@ -shared -fpic $^
